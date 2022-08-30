@@ -25,6 +25,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="mr-auto">Lista de Personal</h4>
+                        @can('admin.personal.create')
                         <x-buttom color="primary" ruta="{{ route('admin.personal.create') }}">
                             <x-slot:icon>
                                 <i class="fas fa-plus"></i>
@@ -33,6 +34,7 @@
                                 Nuevo Personal
                             </x-slot>
                         </x-buttom>
+                        @endcan
                     </div>
                     <div class="card-body">
 
@@ -58,15 +60,19 @@
 
                                             </td>
                                             <td class="d-flex">
+                                                @can('admin.personal.edit')
                                                 <x-buttom color="warning align-self-start" ruta="{{ route('admin.personal.edit', $personal) }}">
                                                     <x-slot:icon><i class="fas fa-pen"></i></x-slot>
                                                     <x-slot:title></x-slot>
                                                 </x-buttom>
+                                                @endcan
+                                                @can('admin.personal.destroy')
                                                 <form action="{{ route('admin.personal.destroy', $personal) }}" method="POST" class="ml-2 formulario-elimininar">
                                                     @method('delete')
                                                     @csrf
                                                     <button type="submit" class="btn icon-left btn-danger"><i class="fas fa-trash"></i></button>
                                                 </form>
+                                                @endcan
                                             </td>
                                         </tr>
                                     @endforeach

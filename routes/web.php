@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\administracion\PersonController;
 use App\Http\Controllers\auth\AuthController;
+use App\Http\Controllers\configuracion\RolesController;
 use App\Http\Controllers\configuracion\UserController;
 use App\Http\Controllers\dashboard\DashboardController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,11 @@ Route::group(['prefix'=>'administracion','as'=>'admin.'],function () {
     Route::resource('personal', PersonController::class)->middleware('auth');
 });
 
+//Rutas Configuracion
 Route::group(['prefix'=>'configuracion','as'=>'config.'],function () {
     Route::resource('user', UserController::class)->middleware('auth');
+    Route::get('user/{user}/roleUser', [UserController::class, 'editv2'])->name('user.role');
+    Route::put('user/roleUser/{user}', [UserController::class, 'updatev2'])->name('user.rolePut');
+
+    Route::resource('roles', RolesController::class)->middleware('auth');
 });

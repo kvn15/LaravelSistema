@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class PersonController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:admin.personal.index')->only('index');
+        $this->middleware('can:admin.personal.create')->only('create','store');
+        $this->middleware('can:admin.personal.edit')->only('edit','update');
+        $this->middleware('can:admin.personal.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

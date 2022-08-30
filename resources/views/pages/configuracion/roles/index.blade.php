@@ -2,19 +2,13 @@
 
 @section('title', 'Usuarios')
 
-@section('css')
-    <link rel="stylesheet" href="{{ asset('css/datatable/datatables.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/datatable/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/datatable/select.bootstrap4.min.css') }}">
-@endsection
-
 @section('content')
 
 <div class="section-header">
-    <h1>Mantenimiento de Usuarios</h1>
+    <h1>Mantenimiento de Roles</h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item">Configuración</div>
-        <div class="breadcrumb-item active"><a href="{{ route('config.user.index') }}">Usuarios</a></div>
+        <div class="breadcrumb-item active"><a href="{{ route('config.roles.index') }}">Roles</a></div>
     </div>
 </div>
 
@@ -35,14 +29,14 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="mr-auto">Lista de Usuarios</h4>
-                    @can('config.user.create')
-                    <x-buttom color="primary" ruta="{{ route('config.user.create') }}">
+                    <h4 class="mr-auto">Lista de Roles</h4>
+                    @can('config.roles.create')
+                    <x-buttom color="primary" ruta="{{ route('config.roles.create') }}">
                         <x-slot:icon>
                             <i class="fas fa-plus"></i>
                         </x-slot>
                         <x-slot:title>
-                            Nuevo Usuario
+                            Nuevo Rol
                         </x-slot>
                     </x-buttom>
                     @endcan
@@ -50,36 +44,28 @@
                 <div class="card-body">
 
                     <div class="table-responsive">
-                        <table class="table table-striped" id="table-usuario">
+                        <table class="table table-striped" id="table-personal">
                             <thead>
                                 <tr>
                                     <th>Codigo</th>
-                                    <th>Nombres</th>
-                                    <th>Usuario</th>
-                                    <th>Fecha Registro</th>
+                                    <th>Roles</th>
                                     <th>Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($user as $users)
+                                @foreach ($role as $roles)
                                     <tr>
-                                        <td>{{ $users->id }}</td>
-                                        <td>{{ $users->name }}</td>
-                                        <td>{{ $users->nameUser }}</td>
-                                        <td>{{ $users->created_at }}</td>
+                                        <td>{{ $roles->id }}</td>
+                                        <td>{{ $roles->name }}</td>
                                         <td class="d-flex">
-                                            @can('config.user.edit')
-                                            <x-buttom color="warning align-self-start" ruta="{{ route('config.user.edit', $users) }}">
+                                            @can('config.roles.edit')
+                                            <x-buttom color="warning align-self-start" ruta="{{ route('config.roles.edit', $roles) }}">
                                                 <x-slot:icon><i class="fas fa-pen"></i></x-slot>
                                                 <x-slot:title></x-slot>
                                             </x-buttom>
-                                            <x-buttom color="info align-self-start ml-2" ruta="{{ route('config.user.role', $users) }}">
-                                                <x-slot:icon><i class="fas fa-user-tag"></i></x-slot>
-                                                <x-slot:title></x-slot>
-                                            </x-buttom>
                                             @endcan
-                                            @can('config.user.destroy')
-                                            <form action="{{ route('config.user.destroy', $users) }}" method="POST" class="ml-2 formulario-elimininar">
+                                            @can('config.roles.destroy')
+                                            <form action="{{ route('config.roles.destroy', $roles) }}" method="POST" class="ml-2 formulario-elimininar">
                                                 @method('delete')
                                                 @csrf
                                                 <button type="submit" class="btn icon-left btn-danger"><i class="fas fa-trash"></i></button>
@@ -101,22 +87,14 @@
 
 @endsection
 
-@section('script')
-    <script src="{{ asset('js/datatable/datatables.min.js') }}"></script>
-    <script src="{{ asset('js/datatable/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('js/datatable/dataTables.select.min.js') }}"></script>
-    <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
 
+@section('script')
     <script>
         $(document).ready(function () {
-            $('#table-usuario').DataTable({
-                order: [[0, 'desc']]
-            });
-
             $(".formulario-elimininar").submit(function(e){
                 e.preventDefault();
                 Swal.fire({
-                    title: '¿Desea Eliminar el usuario?',
+                    title: '¿Desea Eliminar el Rol?',
                     text: "Se eliminara de manera permanente",
                     icon: 'warning',
                     showCancelButton: true,
@@ -130,6 +108,6 @@
                         }
                     })
             });
-        });
+        })
     </script>
 @endsection
