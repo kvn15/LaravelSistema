@@ -13,8 +13,8 @@
         <li class="dropdown {{ request()->routeIs('admin.*.*') ? 'active' : '' }}">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-toolbox"></i><span>Administración</span></a>
             <ul class="dropdown-menu">
-              <li><a class="nav-link" href="#">Proveedores</a></li>
-              <li><a class="nav-link" href="#">Clientes</a></li>
+              @can('admin.proveedor.index')<li class="{{ request()->routeIs('admin.proveedor.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.proveedor.index') }}">Proveedores</a></li>@endcan
+              @can('admin.cliente.index')<li class="{{ request()->routeIs('admin.cliente.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.cliente.index') }}">Clientes</a></li>@endcan
               <li><a class="nav-link" href="#">Categorias</a></li>
               <li><a class="nav-link" href="#">Marca</a></li>
               @can('admin.personal.index')<li class="{{ request()->routeIs('admin.personal.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.personal.index') }}">Personal</a></li>@endcan

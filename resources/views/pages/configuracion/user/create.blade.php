@@ -45,7 +45,7 @@
                                 {!! Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => 'Ejem. asd214sd4A']) !!}
                             </div>
                             <div class="form-group col-12 col-md-6">
-                                <label>Contraseña <span class="text-danger">*</span></label>
+                                <label>Asignar Personal <span class="text-danger">*</span></label>
                                 {!! Form::select('person_id',$person, null, ['class' => 'form-control']) !!}
                             </div>
                         </div>

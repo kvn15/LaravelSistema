@@ -40,6 +40,7 @@ class UserController extends Controller
     {
         $person = Person::select('id')
                     ->selectRaw("CONCAT(`nombres`,' ',`apellidos`) as `persona`")
+                    ->where('estado',1)
                     ->pluck('persona','id')->toArray();
 
         return view('pages.configuracion.user.create', compact('person'));
@@ -76,9 +77,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        $person = Person::select('id')
+                ->selectRaw("CONCAT(`nombres`,' ',`apellidos`) as `persona`")
+                ->where('estado',1)
+                ->pluck('persona','id')->toArray();
+
+        return view('pages.configuracion.user.edit', compact('user', 'person'));
     }
 
     /**
@@ -88,9 +94,17 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'nameUser' => 'required|min:5|unique:users,nameUser,'.$user->id,
+            'name' => 'required|min:5',
+            'person_id' => 'required'
+        ]);
+
+        $user->update($request->all());
+
+        return redirect()->route('config.user.index')->with('mensaje','Se edito correctamente el usuario');
     }
 
     /**
@@ -99,7 +113,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
         //
     }

@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\administracion\PersonController;
+use App\Http\Controllers\administracion\ProveedorController;
 use App\Http\Controllers\auth\AuthController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\configuracion\RolesController;
 use App\Http\Controllers\configuracion\UserController;
 use App\Http\Controllers\dashboard\DashboardController;
@@ -31,6 +33,10 @@ Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.
 
 Route::group(['prefix'=>'administracion','as'=>'admin.'],function () {
     Route::resource('personal', PersonController::class)->middleware('auth');
+    //Crud Cliente
+    Route::resource('cliente', ClientController::class)->middleware('auth');
+    //Crud Proveedor
+    Route::resource('proveedor', ProveedorController::class)->middleware('auth');
 });
 
 //Rutas Configuracion
@@ -38,6 +44,6 @@ Route::group(['prefix'=>'configuracion','as'=>'config.'],function () {
     Route::resource('user', UserController::class)->middleware('auth');
     Route::get('user/{user}/roleUser', [UserController::class, 'editv2'])->name('user.role');
     Route::put('user/roleUser/{user}', [UserController::class, 'updatev2'])->name('user.rolePut');
-
+    //Crud Roles
     Route::resource('roles', RolesController::class)->middleware('auth');
 });

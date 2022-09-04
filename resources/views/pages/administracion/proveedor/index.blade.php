@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 
-@section('title', 'Roles')
+@section('title', 'Proveedores')
 
 @section('content')
 
@@ -44,11 +44,14 @@
                 <div class="card-body">
 
                     <div class="table-responsive">
-                        <table class="table table-striped" id="table-personal">
+                        <table class="table table-striped" id="table-proveedor">
                             <thead>
                                 <tr>
                                     <th>Codigo</th>
-                                    <th>Roles</th>
+                                    <th>Identificacion</th>
+                                    <th>Nombre</th>
+                                    <th>Correo Electronico</th>
+                                    <th>Encargado</th>
                                     <th>Acción</th>
                                 </tr>
                             </thead>
@@ -89,8 +92,18 @@
 
 
 @section('script')
+
+    <script src="{{ asset('js/datatable/datatables.min.js') }}"></script>
+    <script src="{{ asset('js/datatable/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('js/datatable/dataTables.select.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+
     <script>
         $(document).ready(function () {
+            $('#table-proveedor').DataTable({
+                order: [[0, 'desc']]
+            });
+
             $(".formulario-elimininar").submit(function(e){
                 e.preventDefault();
                 Swal.fire({

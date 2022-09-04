@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Client;
+use App\Models\Identification;
 use App\Models\Person;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -33,9 +35,11 @@ class DatabaseSeeder extends Seeder
             'person_id' => Person::inRandomOrder()->first()->id
         ])->assignRole('Lector');
 
+        $this->call(IdentificationSeeder::class);
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        Client::factory(15)->create();
     }
 }
