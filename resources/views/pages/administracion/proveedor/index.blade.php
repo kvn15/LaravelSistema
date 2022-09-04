@@ -1,14 +1,20 @@
 @extends('layouts.layout')
 
-@section('title', 'Proveedores')
+@section('title', 'Proveedor')
+
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/datatable/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/datatable/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/datatable/select.bootstrap4.min.css') }}">
+@endsection
 
 @section('content')
 
 <div class="section-header">
-    <h1>Mantenimiento de Roles</h1>
+    <h1>Mantenimiento de Proveedores</h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item">Configuración</div>
-        <div class="breadcrumb-item active"><a href="{{ route('config.roles.index') }}">Roles</a></div>
+        <div class="breadcrumb-item active"><a href="{{ route('admin.proveedor.index') }}">Proveedor</a></div>
     </div>
 </div>
 
@@ -29,14 +35,14 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="mr-auto">Lista de Roles</h4>
-                    @can('config.roles.create')
-                    <x-buttom color="primary" ruta="{{ route('config.roles.create') }}">
+                    <h4 class="mr-auto">Lista de Proveedores</h4>
+                    @can('admin.proveedor.create')
+                    <x-buttom color="primary" ruta="{{ route('admin.proveedor.create') }}">
                         <x-slot:icon>
                             <i class="fas fa-plus"></i>
                         </x-slot>
                         <x-slot:title>
-                            Nuevo Rol
+                            Nuevo Proveedor
                         </x-slot>
                     </x-buttom>
                     @endcan
@@ -49,26 +55,33 @@
                                 <tr>
                                     <th>Codigo</th>
                                     <th>Identificacion</th>
-                                    <th>Nombre</th>
+                                    <th>Nombre Proveedor</th>
                                     <th>Correo Electronico</th>
                                     <th>Encargado</th>
                                     <th>Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($role as $roles)
+                                @foreach ($provedors as $proveedor)
                                     <tr>
-                                        <td>{{ $roles->id }}</td>
-                                        <td>{{ $roles->name }}</td>
+                                        <td>{{ $proveedor->id }}</td>
+                                        <td>{{ $proveedor->identification }}</td>
+                                        <td>{{ $proveedor->name }}</td>
+                                        <td>{{ $proveedor->email }}</td>
+                                        <td>{{ $proveedor->emcargado }}</td>
                                         <td class="d-flex">
-                                            @can('config.roles.edit')
-                                            <x-buttom color="warning align-self-start" ruta="{{ route('config.roles.edit', $roles) }}">
+                                            <x-buttom color="info align-self-start" ruta="{{ route('admin.proveedor.show', $proveedor) }}">
+                                                <x-slot:icon><i class="fas fa-eye"></i></x-slot>
+                                                <x-slot:title></x-slot>
+                                            </x-buttom>
+                                            @can('admin.proveedor.edit')
+                                            <x-buttom color="warning align-self-start ml-2" ruta="{{ route('admin.proveedor.edit', $proveedor) }}">
                                                 <x-slot:icon><i class="fas fa-pen"></i></x-slot>
                                                 <x-slot:title></x-slot>
                                             </x-buttom>
                                             @endcan
-                                            @can('config.roles.destroy')
-                                            <form action="{{ route('config.roles.destroy', $roles) }}" method="POST" class="ml-2 formulario-elimininar">
+                                            @can('admin.proveedor.destroy')
+                                            <form action="{{ route('admin.proveedor.destroy', $proveedor) }}" method="POST" class="ml-2 formulario-elimininar">
                                                 @method('delete')
                                                 @csrf
                                                 <button type="submit" class="btn icon-left btn-danger"><i class="fas fa-trash"></i></button>
@@ -107,7 +120,7 @@
             $(".formulario-elimininar").submit(function(e){
                 e.preventDefault();
                 Swal.fire({
-                    title: '¿Desea Eliminar el Rol?',
+                    title: '¿Desea Eliminar el Proveedor?',
                     text: "Se eliminara de manera permanente",
                     icon: 'warning',
                     showCancelButton: true,

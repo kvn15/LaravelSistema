@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Client;
 use App\Models\Identification;
 use App\Models\Person;
+use App\Models\Provedor;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -41,5 +42,6 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         Client::factory(15)->create();
+        Provedor::factory(20)->create();
     }
 }
