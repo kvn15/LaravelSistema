@@ -58,6 +58,7 @@
                                     <th>Nombre Proveedor</th>
                                     <th>Correo Electronico</th>
                                     <th>Encargado</th>
+                                    <th>Estado</th>
                                     <th>Acción</th>
                                 </tr>
                             </thead>
@@ -69,6 +70,7 @@
                                         <td>{{ $proveedor->name }}</td>
                                         <td>{{ $proveedor->email }}</td>
                                         <td>{{ $proveedor->emcargado }}</td>
+                                        <td>{{ $proveedor->estadoName }}</td>
                                         <td class="d-flex">
                                             <x-buttom color="info align-self-start" ruta="{{ route('admin.proveedor.show', $proveedor) }}">
                                                 <x-slot:icon><i class="fas fa-eye"></i></x-slot>

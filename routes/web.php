@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\administracion\BrandController;
+use App\Http\Controllers\administracion\CajaController;
+use App\Http\Controllers\administracion\CategoryController;
 use App\Http\Controllers\administracion\PersonController;
+use App\Http\Controllers\administracion\PresentationController;
 use App\Http\Controllers\administracion\ProveedorController;
 use App\Http\Controllers\auth\AuthController;
 use App\Http\Controllers\ClientController;
@@ -37,6 +41,14 @@ Route::group(['prefix'=>'administracion','as'=>'admin.'],function () {
     Route::resource('cliente', ClientController::class)->middleware('auth');
     //Crud Proveedor
     Route::resource('proveedor', ProveedorController::class)->middleware('auth');
+    //Crud Categoria
+    Route::resource('categoria', CategoryController::class)->middleware('auth');
+    //Crud Marca
+    Route::resource('marca', BrandController::class)->middleware('auth');
+    //Crud Presentacion
+    Route::resource('presentacion', PresentationController::class)->middleware('auth');
+    //Crud Caja
+    Route::resource('caja', CajaController::class)->middleware('auth');
 });
 
 //Rutas Configuracion

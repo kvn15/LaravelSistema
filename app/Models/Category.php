@@ -6,12 +6,10 @@ use App\Models\Scopes\EstadoScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Provedor extends Model
+class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'identifications_id','identification','name','direccion',
-        'emcargado','email','telefono','estado'
-    ];
+    protected $fillable = ['name','estado'];
+
 }

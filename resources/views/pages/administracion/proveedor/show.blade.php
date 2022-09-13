@@ -91,6 +91,18 @@
                             </div>
                             @enderror  
                         </div>
+                        <div class="form-group col-12 col-md-6 col-lg-3">
+                            <label>Estado</label>
+                            {!! Form::select('estado', [
+                                1 => 'Habilitado',
+                                0 => 'Inhabilitado',
+                            ], null, ['class' => 'form-control','disabled']) !!}
+                            @error('estado')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                            @enderror     
+                        </div>
                     </div>
                     {!! Form::close() !!}
 

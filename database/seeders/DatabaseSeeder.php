@@ -43,5 +43,9 @@ class DatabaseSeeder extends Seeder
         // ]);
         Client::factory(15)->create();
         Provedor::factory(20)->create();
+
+        $this->call(BrandSeeder::class);
+        $this->call(PresentationSeeder::class);
+        $this->call(CajaSeeder::class);
     }
 }

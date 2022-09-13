@@ -15,11 +15,11 @@
             <ul class="dropdown-menu">
               @can('admin.proveedor.index')<li class="{{ request()->routeIs('admin.proveedor.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.proveedor.index') }}">Proveedores</a></li>@endcan
               @can('admin.cliente.index')<li class="{{ request()->routeIs('admin.cliente.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.cliente.index') }}">Clientes</a></li>@endcan
-              <li><a class="nav-link" href="#">Categorias</a></li>
-              <li><a class="nav-link" href="#">Marca</a></li>
+              @can('admin.categoria.index')<li class="{{ request()->routeIs('admin.categoria.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.categoria.index') }}">Categorias</a></li>@endcan
+              @can('admin.marca.index')<li class="{{ request()->routeIs('admin.marca.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.marca.index') }}">Marca</a></li>@endcan
               @can('admin.personal.index')<li class="{{ request()->routeIs('admin.personal.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.personal.index') }}">Personal</a></li>@endcan
-              <li><a class="nav-link" href="#">Caja</a></li>
-              <li><a class="nav-link" href="#">Presentación</a></li>
+              @can('admin.caja.index')<li class="{{ request()->routeIs('admin.caja.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.caja.index') }}">Caja</a></li>@endcan
+              @can('admin.presentacion.index')<li class="{{ request()->routeIs('admin.presentacion.*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.presentacion.index') }}">Presentación</a></li>@endcan
             </ul>
         </li>
         @endcan

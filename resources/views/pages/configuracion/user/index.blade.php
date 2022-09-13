@@ -73,10 +73,6 @@
                                                 <x-slot:icon><i class="fas fa-pen"></i></x-slot>
                                                 <x-slot:title></x-slot>
                                             </x-buttom>
-                                            <x-buttom color="info align-self-start ml-2" ruta="{{ route('config.user.role', $users) }}">
-                                                <x-slot:icon><i class="fas fa-user-tag"></i></x-slot>
-                                                <x-slot:title></x-slot>
-                                            </x-buttom>
                                             @endcan
                                             @can('config.user.destroy')
                                             <form action="{{ route('config.user.destroy', $users) }}" method="POST" class="ml-2 formulario-elimininar">
@@ -84,6 +80,19 @@
                                                 @csrf
                                                 <button type="submit" class="btn icon-left btn-danger"><i class="fas fa-trash"></i></button>
                                             </form>
+                                            @endcan
+                                            @can('config.user.edit')
+                                            <div class="dropdown">
+                                                <button class="ml-2 btn btn-icon btn-dark" type="button" id="dropdownMenuButton4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropleft">
+                                                    <a class="dropdown-item has-icon" href="{{ route('config.user.role', $users) }}">
+                                                        <i class="fas fa-user-tag"></i> Asignar Rol
+                                                    </a>
+                                                    <a class="dropdown-item has-icon" href="#"><i class="fas fa-cash-register"></i> Asignar Caja</a>
+                                                </div>
+                                            </div>
                                             @endcan
                                         </td>
                                     </tr>

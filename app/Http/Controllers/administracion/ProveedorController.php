@@ -26,7 +26,10 @@ class ProveedorController extends Controller
      */
     public function index()
     {
-        $provedors = Provedor::all();
+        $provedors = Provedor::select('id','identification','name',
+        'emcargado','email','estado')
+        ->selectRaw("IF(`estado` = 1 , 'Habilitado' , 'Inhabilitado') as `estadoName`")
+        ->get();
 
         return view('pages.administracion.proveedor.index', compact('provedors'));
     }
